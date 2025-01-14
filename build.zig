@@ -39,7 +39,7 @@ pub fn build(b: *Build) void {
         ziglua.addCMacro("LUA_VECTOR_SIZE", b.fmt("{}", .{vector_size}));
     }
 
-    const upstream = b.dependency(@tagName(lang), .{});
+    const upstream = b.lazyDependency(@tagName(lang), .{});
 
     const lib = switch (lang) {
         .luajit => luajit_setup.configure(b, target, optimize, upstream, shared),
